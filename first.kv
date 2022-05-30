@@ -5,14 +5,17 @@ ScreenManager:
         GridLayout:
             cols:1
             TextInput:
-                id: _a
+                id: _weight_input
                 hint_text: 'weight'
+                input_filter: 'float'
             TextInput:
-                id: _b
+                id: _height_input
                 hint_text: 'height'
+                input_filter: 'float'
             TextInput:
-                id: _c
+                id: _age_input
                 hint_text: 'age'
+                input_filter: 'int'
             Label:
                 id: _result
             Button:
@@ -294,7 +297,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets1 = str(float(14)-(float(700)/float(90)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets1 = str(float(14)-(float(700)/float(90)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed1.text = app.speed_calc2(_mets1)
             Label:
                 id:_speed1
@@ -330,7 +333,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets2 = str(float(14)-(float(700)/float(90)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets2 = str(float(14)-(float(700)/float(90)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed2.text = app.speed_calc(_mets2)
             Label:
                 id:_speed2
@@ -365,7 +368,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets3 = str(float(14)-(float(700)/float(110)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets3 = str(float(14)-(float(700)/float(110)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed3.text = app.speed_calc2(_mets3)
             Label:
                 id:_speed3
@@ -400,7 +403,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets4 = str(float(14)-(float(700)/float(110)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets4 = str(float(14)-(float(700)/float(110)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed4.text = app.speed_calc(_mets4)
             Label:
                 id:_speed4
@@ -437,7 +440,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets5 = str(float(14)-(float(med111.text)/float(40)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets5 = str(float(14)-(float(med111.text)/float(40)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed5.text = app.speed_calc2(_mets5)
             Label:
                 id:_speed5
@@ -473,7 +476,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets6 = str(float(14)-(float(med111.text)/float(40)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets6 = str(float(14)-(float(med111.text)/float(40)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed6.text = app.speed_calc(_mets6)
             Label:
                 id:_speed6
@@ -508,7 +511,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets7 = str(float(14)-(float(med111.text)/float(50)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets7 = str(float(14)-(float(med111.text)/float(50)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed7.text = app.speed_calc2(_mets7)
             Label:
                 id:_speed7
@@ -543,7 +546,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets8 = str(float(14)-(float(med111.text)/float(50)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets8 = str(float(14)-(float(med111.text)/float(50)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed8.text = app.speed_calc(_mets8)
             Label:
                 id:_speed8
@@ -583,7 +586,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets9 = str(float(14)-(float(easy111.text)/float(8)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets9 = str(float(14)-(float(easy111.text)/float(8)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed9.text = app.speed_calc2(_mets9)
             Label:
                 id:_speed9
@@ -619,7 +622,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets10 = str(float(14)-(float(easy111.text)/float(8)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets10 = str(float(14)-(float(easy111.text)/float(8)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed10.text = app.speed_calc(_mets10)
             Label:
                 id:_speed10
@@ -654,7 +657,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets11 = str(float(14)-(float(easy111.text)/float(10)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets11 = str(float(14)-(float(easy111.text)/float(10)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed11.text = app.speed_calc2(_mets11)
             Label:
                 id:_speed11
@@ -689,7 +692,7 @@ ScreenManager:
             Button:
                 text:'speed'
                 on_press:
-                    _mets12 = str(float(14)-(float(easy111.text)/float(10)/float(0.005)/float(_a.text)/float(3.5)))
+                    _mets12 = str(float(14)-(float(easy111.text)/float(10)/float(0.005)/float(_weight_input.text)/float(3.5)))
                     _speed12.text = app.speed_calc(_mets12)
             Label:
                 id:_speed12

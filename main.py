@@ -145,7 +145,7 @@ class FirstApp(kivy.app.App):
 
 
 
-class LoadDialog:
+class LoadDialog: 
     pass
 
 
