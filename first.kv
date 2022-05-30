@@ -1,0 +1,719 @@
+ScreenManager:
+    id: _screen_manager
+    Screen:
+        name: 'screen1'
+        GridLayout:
+            cols:1
+            TextInput:
+                id: _a
+                hint_text: 'weight'
+            TextInput:
+                id: _b
+                hint_text: 'height'
+            TextInput:
+                id: _c
+                hint_text: 'age'
+            Label:
+                id: _result
+            Button:
+                text: 'MAN BMR'
+                on_press: _result.text = app.calculateManBMI(_weight_input.text, _height_input.text, _age_input.text)
+            Button:
+                text: 'WOMAN BMR'
+                on_press: _result.text = app.calculateWomanBMI(_weight_input.text, _height_input.text, _age_input.text)
+            Button:
+                text: 'NEXT'
+                on_press: _screen_manager.current = 'screen2'
+    Screen:
+        name: 'screen2'
+        GridLayout:
+            cols:2
+            Button:
+                text: 'Breakfast'
+                on_press: _screen_manager.current = 'deep1'
+            Label:
+                id:_calorie1
+
+            Button:
+                text: 'Lunch'
+                on_press: _screen_manager.current = 'deep2'
+            Label:
+                id:_calorie2
+            Button:
+                text: 'Dinner'
+                on_press: _screen_manager.current = 'deep3'
+            Label:
+                id:_calorie3
+            Button:
+                text:'sum calorie'
+                on_press: _tcalorie.text = str(float(_calorie1.text)+float(_calorie2.text)+float(_calorie3.text))
+            Label:
+                id:_tcalorie
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'screen1'
+            Button:
+                text: 'Go To Exercise'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'deep1'
+        GridLayout:
+            cols:1
+            Label:
+                text: "Predicted Class Appears Here."
+                font_size: 30
+                id: label11
+            Image:
+                id: img11
+                source: ""
+
+            FileChooserListView:
+                id: filechooser
+                on_selection: app.image_select(filechooser.selection)
+
+
+            Button:
+                text: "Classify Image."
+                font_size: 30
+                on_press: app.classify_image11()
+            Button:
+                text: "OK"
+                font_size: 30
+                on_press:
+                    _screen_manager.current = 'screen2'
+
+    Screen:
+        name: 'deep2'
+        GridLayout:
+            cols:1
+            Label:
+                text: "Predicted Class Appears Here."
+                font_size: 30
+                id: label22
+            Image:
+                id: img22
+                source: ""
+
+            FileChooserListView:
+                id: filechooser1
+                on_selection: app.image_select1(filechooser1.selection)
+
+            Button:
+                text: "Classify Image."
+                font_size: 30
+                on_press: app.classify_image22()
+            Button:
+                text: "OK"
+                font_size: 30
+                on_press:
+                    _screen_manager.current = 'screen2'
+    Screen:
+        name: 'deep3'
+        GridLayout:
+            cols:1
+            Label:
+                text: "Predicted Class Appears Here."
+                font_size: 30
+                id: label33
+            Image:
+                id: img33
+                source: ""
+
+            FileChooserListView:
+                id: filechooser2
+                on_selection: app.image_select2(filechooser2.selection)
+
+            Button:
+                text: "Classify Image."
+                font_size: 30
+                on_press: app.classify_image33()
+            Button:
+                text: "OK"
+                font_size: 30
+                on_press:
+                    _screen_manager.current = 'screen2'
+    Screen:
+        name: 'menu1'
+        BoxLayout:
+            orientation: 'vertical'
+            BoxLayout:
+                orientation: 'horizontal'
+
+                Label:
+                    id: hard111
+                Button:
+                    text: 'Burn 700kcal?'
+
+                    on_press:
+                        hard111.text = str(float(700))
+                Button:
+                    text: 'Yes!'
+                    on_press: _screen_manager.current = 'hard'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id: med111
+                Button:
+                    text: 'Burn half?'
+                    on_press: med111.text = str(float(0.5)*(700+float(_tcalorie.text)-float(_result.text)))
+                Button:
+                    text: 'Yes!'
+                    on_press: _screen_manager.current = 'medium'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Label:
+                    id: easy111
+                Button:
+                    text: 'Burn little?'
+                    on_press: easy111.text = str(float(_tcalorie.text)-float(_result.text))
+                Button:
+                    text: 'Yes!'
+                    on_press: _screen_manager.current = 'easy'
+
+            BoxLayout:
+                orientation: 'horizontal'
+                Button:
+                    text: 'Back'
+                    on_press: _screen_manager.current = 'screen2'
+
+
+    Screen:
+        name: 'hard'
+        BoxLayout:
+            Button:
+                text: '90 mins'
+                on_press: _screen_manager.current = 'hard1'
+
+            Button:
+                text: '110 mins'
+                on_press: _screen_manager.current = 'hard2'
+
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'medium'
+        BoxLayout:
+            Button:
+                text: '40 mins'
+                on_press: _screen_manager.current = 'med1'
+
+            Button:
+                text: '50 mins'
+                on_press: _screen_manager.current = 'med2'
+
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'easy'
+        BoxLayout:
+            Button:
+                text: '8 mins'
+                on_press: _screen_manager.current = 'easy1'
+
+            Button:
+                text: '10 mins'
+                on_press: _screen_manager.current = 'easy2'
+
+            Button:
+                text: 'Back'
+                on_press: _screen_manager.current = 'menu1'
+
+
+
+    Screen:
+        name: 'hard1'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'final1'
+
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'final2'
+
+    Screen:
+        name: 'hard2'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'final3'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'final4'
+
+    Screen:
+        name: 'med1'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'final5'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'final6'
+
+    Screen:
+        name: 'med2'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'final7'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'final8'
+
+    Screen:
+        name: 'easy1'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'final9'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'final10'
+
+    Screen:
+        name: 'easy2'
+        BoxLayout:
+            Button:
+                text: 'Yes Angle!'
+                on_press: _screen_manager.current = 'final11'
+            Button:
+                text: 'No Angle!'
+                on_press: _screen_manager.current = 'final12'
+
+
+
+    Screen:
+        name: 'final1'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets1 = str(float(14)-(float(700)/float(90)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed1.text = app.speed_calc2(_mets1)
+            Label:
+                id:_speed1
+
+            Button:
+                text:'Angle'
+                on_press: _level.text = '1'
+
+            Label:
+                id:_level
+
+            Button:
+                text:'time'
+                on_press: _time.text = '90'
+
+            Label:
+                id:_time
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level.text)); app.bluetoothSend('D', float(_speed1.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final2'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets2 = str(float(14)-(float(700)/float(90)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed2.text = app.speed_calc(_mets2)
+            Label:
+                id:_speed2
+
+            Button:
+                text:'Angle'
+                on_press: _level2.text = '0'
+
+            Label:
+                id:_level2
+
+            Button:
+                text:'time'
+                on_press: _time2.text = '90'
+            Label:
+                id:_time2
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level2.text)); app.bluetoothSend('D', float(_speed2.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final3'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets3 = str(float(14)-(float(700)/float(110)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed3.text = app.speed_calc2(_mets3)
+            Label:
+                id:_speed3
+
+            Button:
+                text:'Angle'
+                on_press: _level3.text = '1'
+
+            Label:
+                id:_level3
+
+            Button:
+                text:'time'
+                on_press: _time3.text = '110'
+            Label:
+                id:_time3
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level3.text)); app.bluetoothSend('D', float(_speed3.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final4'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets4 = str(float(14)-(float(700)/float(110)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed4.text = app.speed_calc(_mets4)
+            Label:
+                id:_speed4
+
+            Button:
+                text:'Angle'
+                on_press: _level4.text = '0'
+
+            Label:
+                id:_level4
+
+            Button:
+                text:'time'
+                on_press: _time4.text = '110'
+            Label:
+                id:_time4
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level4.text)); app.bluetoothSend('D', float(_speed4.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+
+
+    Screen:
+        name: 'final5'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets5 = str(float(14)-(float(med111.text)/float(40)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed5.text = app.speed_calc2(_mets5)
+            Label:
+                id:_speed5
+
+            Button:
+                text:'Angle'
+                on_press: _level5.text = '1'
+
+            Label:
+                id:_level5
+
+            Button:
+                text:'time'
+                on_press: _time5.text = '40'
+
+            Label:
+                id:_time5
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level5.text)); app.bluetoothSend('D', float(_speed5.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final6'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets6 = str(float(14)-(float(med111.text)/float(40)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed6.text = app.speed_calc(_mets6)
+            Label:
+                id:_speed6
+
+            Button:
+                text:'Angle'
+                on_press: _level6.text = '0'
+
+            Label:
+                id:_level6
+
+            Button:
+                text:'time'
+                on_press: _time6.text = '40'
+            Label:
+                id:_time6
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level6.text)); app.bluetoothSend('D', float(_speed6.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final7'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets7 = str(float(14)-(float(med111.text)/float(50)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed7.text = app.speed_calc2(_mets7)
+            Label:
+                id:_speed7
+
+            Button:
+                text:'Angle'
+                on_press: _level7.text = '1'
+
+            Label:
+                id:_level7
+
+            Button:
+                text:'time'
+                on_press: _time7.text = '50'
+            Label:
+                id:_time7
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level7.text)); app.bluetoothSend('D', float(_speed7.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final8'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets8 = str(float(14)-(float(med111.text)/float(50)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed8.text = app.speed_calc(_mets8)
+            Label:
+                id:_speed8
+
+            Button:
+                text:'Angle'
+                on_press: _level8.text = '0'
+
+            Label:
+                id:_level8
+
+            Button:
+                text:'time'
+                on_press: _time8.text = '50'
+            Label:
+                id:_time8
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level8.text)); app.bluetoothSend('D', float(_speed8.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+
+
+
+
+
+    Screen:
+        name: 'final9'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets9 = str(float(14)-(float(easy111.text)/float(8)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed9.text = app.speed_calc2(_mets9)
+            Label:
+                id:_speed9
+
+            Button:
+                text:'Angle'
+                on_press: _level9.text = '1'
+
+            Label:
+                id:_level9
+
+            Button:
+                text:'time'
+                on_press: _time9.text = '8'
+
+            Label:
+                id:_time9
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level9.text)); app.bluetoothSend('D', float(_speed9.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final10'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets10 = str(float(14)-(float(easy111.text)/float(8)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed10.text = app.speed_calc(_mets10)
+            Label:
+                id:_speed10
+
+            Button:
+                text:'Angle'
+                on_press: _level10.text = '0'
+
+            Label:
+                id:_level10
+
+            Button:
+                text:'time'
+                on_press: _time10.text = '8'
+            Label:
+                id:_time10
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level10.text)); app.bluetoothSend('D', float(_speed10.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final11'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets11 = str(float(14)-(float(easy111.text)/float(10)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed11.text = app.speed_calc2(_mets11)
+            Label:
+                id:_speed11
+
+            Button:
+                text:'Angle'
+                on_press: _level11.text = '1'
+
+            Label:
+                id:_level11
+
+            Button:
+                text:'time'
+                on_press: _time11.text = '10'
+            Label:
+                id:_time11
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level11.text)); app.bluetoothSend('D', float(_speed11.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
+    Screen:
+        name: 'final12'
+        GridLayout:
+            cols:1
+            Button:
+                text:'speed'
+                on_press:
+                    _mets12 = str(float(14)-(float(easy111.text)/float(10)/float(0.005)/float(_a.text)/float(3.5)))
+                    _speed12.text = app.speed_calc(_mets12)
+            Label:
+                id:_speed12
+
+            Button:
+                text:'Angle'
+                on_press: _level12.text = '0'
+
+            Label:
+                id:_level12
+
+            Button:
+                text:'time'
+                on_press: _time12.text = '10'
+            Label:
+                id:_time12
+
+            Button:
+                text:'Lets start'
+                on_press: app.bluetoothSend('V', int(_level12.text)); app.bluetoothSend('D', float(_speed12.text))
+
+            Button:
+                text:'Stop'
+                on_press: app.bluetoothSend('D', 0);
+            Button:
+                text: 'Choose again'
+                on_press: _screen_manager.current = 'menu1'
