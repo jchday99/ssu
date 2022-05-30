@@ -170,7 +170,7 @@ ScreenManager:
                     id: easy111
                 Button:
                     text: 'Burn little?'
-                    on_press: easy111.text = str(float(_tcalorie.text)-float(_result.text))
+                    on_press: easy111.text = app.burn_little(_tcalorie.text, _result.text)
                 Button:
                     text: 'Yes!'
                     on_press: _screen_manager.current = 'easy'

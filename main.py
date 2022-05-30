@@ -10,31 +10,11 @@ from kivy.lang import Builder
 from kivy.properties import ObjectProperty
 import math
 
-from jnius import autoclass
 
-BluetoothAdapter = autoclass('android.bluetooth.BluetoothAdapter')
-BluetoothDevice = autoclass('android.bluetooth.BluetoothDevice')
-BluetoothSocket = autoclass('android.bluetooth.BluetoothSocket')
-UUID = autoclass('java.util.UUID')
 
-def getSocketStream(name):
-    paired_devices = BluetoothAdapter.getDefaultAdapter().getBondedDevices().toArray()
-    socket = None
-    for device in paired_devices:
-        if device.getName() == name:
-            socket = device.createRfcommSocketToServiceRecord(
-                UUID.fromString("00001101-0000-1000-8000-00805F9B34FB"))
-            recv_stream = socket.getInputStream()
-            send_stream = socket.getOutputStream()
-            break
-    socket.connect()
-    return recv_stream, send_stream
 
 class FirstApp(kivy.app.App):
 
-    def __init__(self, **kwargs):
-        super(FirstApp, self).__init__(**kwargs)
-        self.recv_stream, self.send_stream = getSocketStream('HC-05')
 
 
     def classify_image11(self):
@@ -115,12 +95,6 @@ class FirstApp(kivy.app.App):
         else:
             return 'Error!'
 
-    def bluetoothSend(self, cmd, value):
-        # cmd : DC모터인 경우 'D', Linear모터인 경우 'V' 입력
-        # value : DC모터인 경우 pwm값, Linear모터인 경우 방향. 1:상승, 0:하강
-        if self.send_stream!=None:
-            self.send_stream.write(cmd.encode('utf-8') + bytes([value]) + b'\n')
-            self.send_stream.flush()
 
     def speed_calc(self, mets):
 
@@ -142,10 +116,17 @@ class FirstApp(kivy.app.App):
         else:
             return 'Error!'
 
+    def burn_little(self, cal, rea):
+        if (cal != '' and rea != ''):
+            if float(cal) > float(rea):
+                return str(float(cal)-float(rea))
+            else:
+                return 'Eat more!'
+        else:
+            return 'Error!'
 
 
-
-class LoadDialog: 
+class LoadDialog:
     pass
 
 
